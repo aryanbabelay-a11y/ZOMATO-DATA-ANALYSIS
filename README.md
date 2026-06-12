@@ -1,6 +1,6 @@
 # ZOMATO-DATA-ANALYSIS
 
-##1. Project Overview
+## 1. Project Overview
 This project analyzes Zomato's restaurant listing data for Bangalore to uncover dining trends, location-based insights, cuisine popularity, and the impact of online ordering and table booking on customer ratings. The pipeline covers Python EDA, PostgreSQL querying, and Power BI dashboard design.
 
 ## 2. Dataset Information
