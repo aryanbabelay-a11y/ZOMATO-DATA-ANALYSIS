@@ -1,10 +1,9 @@
 # ZOMATO-DATA-ANALYSIS
 
-Project Setup, Column Guide, SQL Notes & Power BI Instructions
-1. Project Overview
+##1. Project Overview
 This project analyzes Zomato's restaurant listing data for Bangalore to uncover dining trends, location-based insights, cuisine popularity, and the impact of online ordering and table booking on customer ratings. The pipeline covers Python EDA, PostgreSQL querying, and Power BI dashboard design.
 
-2. Dataset Information
+##2. Dataset Information
 File
 zomato.csv  (Zomato Bangalore Restaurants)
 
@@ -32,7 +31,7 @@ menu_item	menu_item	TEXT	Menu items
 listed_in(type)	listed_type	TEXT	Buffet / Cafes / Delivery / etc.
 listed_in(city)	listed_city	TEXT	City area
 
-3. Project Structure
+##3. Project Structure
 zomato-analysis/
    zomato.csv                      <- Raw dataset
    zomato_eda.py                   <- Python EDA & cleaning script
@@ -42,7 +41,7 @@ zomato-analysis/
    powerbi/
       Zomato_Dashboard.pbix        <- Power BI dashboard
 
-4. Setup & Installation
+##4. Setup & Installation
 Python Dependencies
 pip install pandas numpy matplotlib seaborn sqlalchemy psycopg2-binary
 
@@ -61,14 +60,14 @@ df.to_sql('zomato', engine, if_exists='replace', index=False)
 Run EDA
 python zomato_eda.py
 
-5. Data Cleaning Notes
+##5. Data Cleaning Notes
 •Rate column: strip '/5' suffix and convert to NUMERIC before inserting
 •Cost column: remove commas (e.g. '1,000' -> 1000) and cast to INT
 •Cuisines column: use UNNEST + STRING_TO_ARRAY in SQL for per-cuisine analysis
 •Rename columns with special characters (parentheses) before loading to SQL
 •Drop duplicate rows — some restaurants appear multiple times for different listing types
 
-6. SQL Queries Covered
+##6. SQL Queries Covered
 
 Query #	Question	Key Note
 Q1	Top 10 locations by restaurant count	Basic GROUP BY + COUNT
@@ -83,7 +82,7 @@ Q8	Rating distribution buckets	CASE WHEN on rate
 IMPORTANT — PostgreSQL ROUND() Fix:
 Always cast float/double columns before ROUND: ROUND(AVG(rate)::NUMERIC, 2)
 
-7. Power BI Dashboard
+##7. Power BI Dashboard
 DAX Measures
 Total Restaurants  = COUNTROWS(zomato)
 Avg Rating         = AVERAGE(zomato[rate])
@@ -106,7 +105,7 @@ Bar Chart	name + votes (Top 10)	Most popular restaurants
 Heatmap Matrix	location vs listed_type	Format distribution by area
 Slicers	location, online_order, book_table, listed_type	Interactivity
 
-8. Key Insights Summary
+##8. Key Insights Summary
 •BTM Layout, Indiranagar, and Koramangala are the top 3 restaurant-dense areas in Bangalore
 •Restaurants with table booking score ~0.3 points higher on average than those without
 •North Indian and Chinese are the two most common cuisine types across all areas
@@ -115,7 +114,7 @@ Slicers	location, online_order, book_table, listed_type	Interactivity
 •Online ordering restaurants generate higher vote counts due to wider customer reach
 •Premium localities (MG Road, Lavelle Road) command Rs. 900-1500+ avg cost for two
 
-9. Notes & Limitations
+##9. Notes & Limitations
 •Dataset scraped from Zomato — may not reflect current restaurant status
 •Some restaurants appear multiple times for different listing_type entries — deduplicate before counting
 •Ratings distribution is right-skewed; most restaurants cluster between 3.5 and 4.2
